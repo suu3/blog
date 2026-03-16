@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 		post.tags.forEach((tag) => tags.add(tag));
 	});
 
-	return [...tags].map((tag) => ({ tag: encodeURIComponent(tag) }));
+	return [...tags].map((tag) => ({ tag }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
