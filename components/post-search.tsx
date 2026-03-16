@@ -135,7 +135,9 @@ export default function PostSearch({ posts }: Props) {
 						type="button"
 						onClick={resetFilters}
 						disabled={
-							query === "" && selectedCategory === "All" && selectedTag === "All"
+							query === "" &&
+							selectedCategory === "All" &&
+							selectedTag === "All"
 						}
 						className={css({
 							position: "absolute",
@@ -444,7 +446,8 @@ export default function PostSearch({ posts }: Props) {
 											className={cx(
 												"post-card-group",
 												css({
-													display: "block",
+													display: "flex",
+													flexDir: "column",
 													h: "full",
 													borderRadius: "1rem",
 													border: "2px solid var(--line)",
@@ -465,35 +468,37 @@ export default function PostSearch({ posts }: Props) {
 													borderRadius: "0.75rem",
 													border: "2px solid var(--line)",
 												})}
-												>
+											>
 												{(() => {
 													const isDummyThumbnail =
 														post.thumbnail === "/images/dummy.png";
 
 													return (
-												<Image
-													src={post.thumbnail || "/images/dummy.png"}
-													alt={post.title}
-													width={320}
-													height={180}
-													className={cx(
-														"y2k-card-image",
-														css({
-															h: "8rem",
-															w: "full",
-															objectFit: isDummyThumbnail ? "contain" : "cover",
-															bg: isDummyThumbnail
-																? "var(--surface-soft)"
-																: "transparent",
-															transition: "transform 0.2s ease",
-														}),
-														css({
-															".post-card-group:hover &": {
-																transform: "scale(1.02)",
-															},
-														}),
-													)}
-												/>
+														<Image
+															src={post.thumbnail || "/images/dummy.png"}
+															alt={post.title}
+															width={320}
+															height={180}
+															className={cx(
+																"y2k-card-image",
+																css({
+																	h: "8rem",
+																	w: "full",
+																	objectFit: isDummyThumbnail
+																		? "contain"
+																		: "cover",
+																	bg: isDummyThumbnail
+																		? "var(--surface-soft)"
+																		: "transparent",
+																	transition: "transform 0.2s ease",
+																}),
+																css({
+																	".post-card-group:hover &": {
+																		transform: "scale(1.02)",
+																	},
+																}),
+															)}
+														/>
 													);
 												})()}
 												<div
@@ -508,19 +513,22 @@ export default function PostSearch({ posts }: Props) {
 													<p
 														className={cx(
 															css({
-															position: "absolute",
-															left: "0.5rem",
-															top: "0.5rem",
-															zIndex: 10,
-															borderRadius: "0.25rem",
-															border: "1px solid var(--line)",
-															px: "0.5rem",
-															py: "0.125rem",
-															fontFamily: "FiraCode-Medium, monospace",
-															fontWeight: "700",
-															fontSize: "10px",
+																position: "absolute",
+																left: "0.5rem",
+																top: "0.5rem",
+																zIndex: 10,
+																borderRadius: "0.25rem",
+																border: "1px solid var(--line)",
+																px: "0.5rem",
+																py: "0.125rem",
+																fontFamily: "FiraCode-Medium, monospace",
+																fontWeight: "700",
+																fontSize: "10px",
 															}),
-															getAccentBadgeClass(post.category, categoryLabels),
+															getAccentBadgeClass(
+																post.category,
+																categoryLabels,
+															),
 														)}
 													>
 														{post.category}
@@ -592,7 +600,8 @@ export default function PostSearch({ posts }: Props) {
 											</div>
 											<p
 												className={css({
-													mt: "0.75rem",
+													mt: "auto",
+													pt: "0.75rem",
 													textAlign: "right",
 													fontFamily: "FiraCode-Medium, monospace",
 													fontSize: "10px",

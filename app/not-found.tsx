@@ -5,6 +5,9 @@ export default function NotFound() {
 	return (
 		<div
 			className={css({
+				mx: "auto",
+				w: "full",
+				maxW: "64rem",
 				display: "flex",
 				flexDir: "column",
 				alignItems: "center",
@@ -39,8 +42,9 @@ export default function NotFound() {
 					lineHeight: "1.6",
 				})}
 			>
-				찾으시는 페이지가 존재하지 않거나, 주소가 변경되었을 수 있습니다.
-				최근 최적화 작업으로 인해 예전 링크(말머리가 포함된 긴 주소)는 더 이상 동작하지 않습니다.
+				찾으시는 페이지가 존재하지 않거나, 주소가 변경되었을 수 있습니다. 최근
+				최적화 작업으로 인해 예전 링크(말머리가 포함된 긴 주소)는 더 이상
+				동작하지 않습니다.
 			</p>
 			<Link
 				href="/"

@@ -6,4 +6,11 @@ export default defineConfig({
 	exclude: [],
 	outdir: "styled-system",
 	jsxFramework: "react",
+	theme: {
+		extend: {
+			breakpoints: {
+				postToc: "1664px",
+			},
+		},
+	},
 });

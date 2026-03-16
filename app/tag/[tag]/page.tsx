@@ -45,7 +45,14 @@ export default async function TagDetailPage({ params }: Props) {
 
 	return (
 		<section
-			className={css({ display: "flex", flexDir: "column", gap: "1rem" })}
+			className={css({
+				mx: "auto",
+				w: "full",
+				maxW: "64rem",
+				display: "flex",
+				flexDir: "column",
+				gap: "1rem",
+			})}
 		>
 			<h1
 				className={css({

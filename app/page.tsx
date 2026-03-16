@@ -7,7 +7,14 @@ export default function HomePage() {
 
 	return (
 		<section
-			className={css({ display: "flex", flexDir: "column", gap: "1.5rem" })}
+			className={css({
+				mx: "auto",
+				w: "full",
+				maxW: "64rem",
+				display: "flex",
+				flexDir: "column",
+				gap: "1.5rem",
+			})}
 		>
 			<PostSearch posts={posts} />
 		</section>

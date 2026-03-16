@@ -16,7 +16,9 @@ export default function ThemeBtn() {
 	}, []);
 
 	if (!mounted) {
-		return <div className={css({ width: "78px", height: "46px" })} aria-hidden />;
+		return (
+			<div className={css({ width: "78px", height: "46px" })} aria-hidden />
+		);
 	}
 
 	const currentTheme = theme === "system" ? resolvedTheme : theme;

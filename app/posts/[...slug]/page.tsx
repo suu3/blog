@@ -57,7 +57,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PostDetailPage({ params }: Props) {
-	const allCategories = Array.from(new Set(getAllPosts().map((item) => item.category)));
+	const allCategories = Array.from(
+		new Set(getAllPosts().map((item) => item.category)),
+	);
 	const { slug: slugSegments } = await params;
 	const slug = slugSegments.map(decodeURIComponent).join("/");
 	const post = getPostBySlug(slug);
@@ -70,14 +72,26 @@ export default async function PostDetailPage({ params }: Props) {
 	const { prev, next } = getAdjacentPosts(slug);
 
 	return (
-		<section
+		<div
 			className={css({
-				display: "grid",
-				gap: "1.5rem",
-				gridTemplateColumns: { base: "1fr", lg: "260px minmax(0,1fr)" },
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "flex-start",
+				gap: "2rem",
+				w: "full",
+				position: "relative",
 			})}
 		>
-			<div className={css({ display: { base: "none", lg: "block" } })}>
+			<div
+				className={css({
+					display: { base: "none", postToc: "block" },
+					flexShrink: 0,
+					w: "260px",
+					alignSelf: "flex-start",
+					position: "sticky",
+					top: "6rem",
+				})}
+			>
 				<PostToc items={headings} />
 			</div>
 
@@ -89,7 +103,8 @@ export default async function PostDetailPage({ params }: Props) {
 					p: { base: "1rem", md: "2rem" },
 					boxShadow: "4px 4px 0 0 var(--line)",
 					minWidth: 0,
-					maxWidth: "100%",
+					w: "full",
+					maxW: "64rem",
 					overflow: "hidden",
 				})}
 			>
@@ -103,9 +118,9 @@ export default async function PostDetailPage({ params }: Props) {
 							px: "0.5rem",
 							py: "0.25rem",
 							fontFamily: "FiraCode-Medium, monospace",
-						fontWeight: "700",
-						fontSize: "0.75rem",
-					}),
+							fontWeight: "700",
+							fontSize: "0.75rem",
+						}),
 						getAccentBadgeClass(post.category, allCategories),
 					)}
 				>
@@ -195,6 +210,14 @@ export default async function PostDetailPage({ params }: Props) {
 					← 목록으로
 				</Link>
 			</article>
-		</section>
+
+			<div
+				className={css({
+					display: { base: "none", postToc: "block" },
+					flexShrink: 0,
+					w: "260px",
+				})}
+			/>
+		</div>
 	);
 }

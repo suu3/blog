@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { css, cx } from "@/styled-system/css";
 
 type TocItem = {
@@ -16,6 +16,8 @@ type Props = {
 export default function PostToc({ items }: Props) {
 	const [tocItems, setTocItems] = useState<TocItem[]>(items);
 	const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
+	const [isScrolling, setIsScrolling] = useState(false);
+	const scrollHideTimeoutRef = useRef<number | null>(null);
 
 	useEffect(() => {
 		if (items.length) {
@@ -94,19 +96,49 @@ export default function PostToc({ items }: Props) {
 		return () => observer.disconnect();
 	}, [itemIds]);
 
+	useEffect(() => {
+		return () => {
+			if (scrollHideTimeoutRef.current !== null) {
+				window.clearTimeout(scrollHideTimeoutRef.current);
+			}
+		};
+	}, []);
+
 	return (
 		<aside
-			className={css({
-				position: "sticky",
-				top: "6rem",
-				display: "block",
-				h: "fit-content",
-				borderRadius: "0.75rem",
-				border: "1px solid var(--line)",
-				bg: "var(--surface)",
-				p: "1rem",
-				boxShadow: "4px 4px 0 0 var(--line)",
-			})}
+			className={cx(
+				"toc-scroll",
+				isScrolling && "is-scrolling",
+				css({
+					display: "block",
+					h: "fit-content",
+					maxH: "calc(100vh - 7rem)",
+					overflowY: "auto",
+					scrollbarWidth: "thin",
+					scrollbarColor: isScrolling
+						? "var(--muted) transparent"
+						: "transparent transparent",
+					borderRadius: "0.75rem",
+					border: "1px solid var(--line)",
+					bg: "var(--surface)",
+					p: "1rem",
+					boxShadow: "4px 4px 0 0 var(--line)",
+				}),
+			)}
+			onScroll={() => {
+				setIsScrolling(true);
+
+				if (scrollHideTimeoutRef.current !== null) {
+					window.clearTimeout(scrollHideTimeoutRef.current);
+				}
+
+				scrollHideTimeoutRef.current = window.setTimeout(() => {
+					setIsScrolling(false);
+				}, 500);
+			}}
+			style={{
+				scrollbarGutter: "stable",
+			}}
 		>
 			<p
 				className={css({
@@ -166,10 +198,6 @@ export default function PostToc({ items }: Props) {
 												})
 											: css({
 													color: "var(--muted)",
-													_hover: {
-														borderColor: "var(--line)",
-														bg: "var(--theme-soft)",
-													},
 												}),
 									)}
 								>

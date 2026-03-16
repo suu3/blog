@@ -21,5 +21,7 @@ export function getAccentBadgeClass(
 ) {
 	const uniqueLabels = Array.from(new Set(orderedLabels));
 	const index = uniqueLabels.indexOf(label);
-	return accentBadgeClasses[(index === -1 ? 0 : index) % accentBadgeClasses.length];
+	return accentBadgeClasses[
+		(index === -1 ? 0 : index) % accentBadgeClasses.length
+	];
 }

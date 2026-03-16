@@ -143,9 +143,7 @@ export default function RootLayout({
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.4, ease: "easeOut" }}
 							className={css({
-								mx: "auto",
 								w: "full",
-								maxW: "64rem",
 								px: "1rem",
 								py: "2rem",
 							})}
