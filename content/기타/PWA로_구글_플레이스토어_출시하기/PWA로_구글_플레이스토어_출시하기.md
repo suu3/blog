@@ -26,8 +26,8 @@ bubblewrap init --manifest=https://my-pwa.com/manifest.json
 
 pwa 설정을 했으면 manifest.json 파일을 넣었을 것이다. manifest.json을 바탕으로 Android App Bundle을 구성한다.
 
-![[https://developers.google.com/codelabs/pwa-in-play?hl=ko#1](https://developers.google.com/codelabs/pwa-in-play?hl=ko#1)](./1.png)
-![[https://developers.google.com/codelabs/pwa-in-play?hl=ko#1](https://developers.google.com/codelabs/pwa-in-play?hl=ko#1)](./2.png)
+![https://developers.google.com/codelabs/pwa-in-play?hl=ko#1](./1.png)
+![https://developers.google.com/codelabs/pwa-in-play?hl=ko#1](./2.png)
 
 서명 키가 아마 없을 것이므로 새로 만든다. 새로 만들면 업데이트 시 계속 써야하므로 키와 비밀번호는 어딘가에 잘 기록하도록 하자.
 
