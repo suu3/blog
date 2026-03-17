@@ -78,19 +78,79 @@ function getLeadingSpaces(value: string): number {
 function parseUnorderedList(lines: string[], start: number) {
 	const items: ListItem[] = [];
 	let i = start;
+	const baseIndent = getLeadingSpaces(lines[start]);
 
 	while (i < lines.length) {
-		const normalizedLine = lines[i].trimStart();
+		const rawLine = lines[i];
+		const normalizedLine = rawLine.trimStart();
+		const leadingSpaces = getLeadingSpaces(rawLine);
 
-		if (!/^[-*]\s+/.test(normalizedLine)) {
+		if (!/^[-*]\s+/.test(normalizedLine) || leadingSpaces < baseIndent) {
 			break;
 		}
 
-		items.push({
+		if (leadingSpaces > baseIndent) {
+			break;
+		}
+
+		const item: ListItem = {
 			text: normalizedLine.replace(/^[-*]\s+/, "").trim(),
 			children: [],
-		});
+			nestedText: [],
+		};
 		i += 1;
+
+		while (i < lines.length) {
+			const nextRawLine = lines[i];
+			const nextNormalizedLine = nextRawLine.trimStart();
+			const nextLeadingSpaces = getLeadingSpaces(nextRawLine);
+
+			if (!nextNormalizedLine) {
+				if (
+					i + 1 < lines.length &&
+					getLeadingSpaces(lines[i + 1]) > baseIndent
+				) {
+					i += 1;
+					continue;
+				}
+				break;
+			}
+
+			if (/^[-*]\s+/.test(nextNormalizedLine)) {
+				if (nextLeadingSpaces <= baseIndent) {
+					break;
+				}
+
+				item.children.push(nextNormalizedLine.replace(/^[-*]\s+/, "").trim());
+				i += 1;
+				continue;
+			}
+
+			if (/^(\d+)\.\s*(.*)$/.test(nextNormalizedLine)) {
+				if (nextLeadingSpaces <= baseIndent) {
+					break;
+				}
+
+				item.children.push(nextNormalizedLine.trim());
+				i += 1;
+				continue;
+			}
+
+			if (nextLeadingSpaces > baseIndent) {
+				if (item.children.length > 0) {
+					item.children[item.children.length - 1] =
+						`${item.children[item.children.length - 1]} ${nextNormalizedLine}`.trim();
+				} else {
+					item.nestedText!.push(nextNormalizedLine);
+				}
+				i += 1;
+				continue;
+			}
+
+			break;
+		}
+
+		items.push(item);
 	}
 
 	return { items, nextIndex: i };
@@ -99,13 +159,14 @@ function parseUnorderedList(lines: string[], start: number) {
 function parseOrderedList(lines: string[], start: number) {
 	const items: ListItem[] = [];
 	let i = start;
+	const baseIndent = getLeadingSpaces(lines[start]);
 
 	while (i < lines.length) {
 		const rawLine = lines[i];
 		const normalizedLine = rawLine.trimStart();
 		const orderedMatch = normalizedLine.match(/^(\d+)\.\s*(.*)$/);
 
-		if (!orderedMatch) {
+		if (!orderedMatch || getLeadingSpaces(rawLine) < baseIndent) {
 			if (
 				!normalizedLine &&
 				i + 1 < lines.length &&
@@ -142,12 +203,12 @@ function parseOrderedList(lines: string[], start: number) {
 			// 다음 리스트 아이템이 시작되면 중단
 			if (
 				/^(\d+)\.\s*(.*)$/.test(nextNormalizedLine) &&
-				nextLeadingSpaces < 2
+				nextLeadingSpaces <= baseIndent
 			) {
 				break;
 			}
 
-			if (nextLeadingSpaces >= 2) {
+			if (nextLeadingSpaces > baseIndent) {
 				if (/^[-*]\s+/.test(nextNormalizedLine)) {
 					// 중첩된 불렛 리스트
 					item.children.push(nextNormalizedLine.replace(/^[-*]\s+/, "").trim());
