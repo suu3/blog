@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { css } from "@/styled-system/css";
 import { getAllPosts } from "@/lib/posts";
@@ -69,14 +69,14 @@ export default async function CategoryDetailPage({ params }: Props) {
 							className={css({
 								display: "block",
 								borderRadius: "0.5rem",
-								border: "2px solid var(--line)",
+								border: "1px solid var(--line)",
 								bg: "var(--surface)",
 								px: "1rem",
 								py: "0.75rem",
 								transition: "all 0.15s ease",
 								_hover: {
 									bg: "var(--theme-soft)",
-									boxShadow: "4px 4px 0 0 var(--line)",
+									boxShadow: "3px 3px 0 0 var(--line)",
 								},
 							})}
 						>
@@ -100,7 +100,7 @@ export default async function CategoryDetailPage({ params }: Props) {
 					display: "inline-block",
 					w: "fit-content",
 					borderRadius: "0.25rem",
-					border: "2px solid var(--line)",
+					border: "1px solid var(--line)",
 					bg: "var(--surface)",
 					px: "0.75rem",
 					py: "0.5rem",
@@ -108,7 +108,7 @@ export default async function CategoryDetailPage({ params }: Props) {
 					transition: "all 0.15s ease",
 					_hover: {
 						bg: "var(--theme-soft)",
-						boxShadow: "4px 4px 0 0 var(--line)",
+						boxShadow: "3px 3px 0 0 var(--line)",
 					},
 				})}
 			>

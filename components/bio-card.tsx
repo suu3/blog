@@ -15,7 +15,7 @@ export default function BioCard({ compact = false, rightElement }: Props) {
 					position: "relative",
 					overflow: "hidden",
 					borderRadius: compact ? "1rem" : "1.125rem",
-					border: "2px solid var(--line)",
+					border: "1px solid var(--line)",
 					bg: "var(--surface)",
 				}),
 			)}
@@ -26,7 +26,7 @@ export default function BioCard({ compact = false, rightElement }: Props) {
 					display: "flex",
 					alignItems: "center",
 					gap: "0.75rem",
-					borderBottom: "2px solid var(--line)",
+					borderBottom: "1px solid var(--line)",
 					bg: "var(--theme-soft)",
 					px: compact ? "0.875rem" : "1rem",
 					py: compact ? "0.75rem" : "0.875rem",
@@ -42,7 +42,7 @@ export default function BioCard({ compact = false, rightElement }: Props) {
 						h: compact ? "3rem" : "4rem",
 						w: compact ? "3rem" : "4rem",
 						borderRadius: "full",
-						border: "2px solid var(--line)",
+						border: "1px solid var(--line)",
 						objectFit: "cover",
 						bg: "var(--surface)",
 					})}

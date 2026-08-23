@@ -101,7 +101,7 @@ export default async function PostDetailPage({ params }: Props) {
 					border: "1px solid var(--line)",
 					bg: "var(--surface)",
 					p: { base: "1rem", md: "2rem" },
-					boxShadow: "4px 4px 0 0 var(--line)",
+					boxShadow: "3px 3px 0 0 var(--line)",
 					minWidth: 0,
 					w: "full",
 					maxW: "64rem",

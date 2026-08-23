@@ -1663,6 +1663,10 @@ const tokens = {
     "value": "1536px",
     "variable": "var(--sizes-breakpoint-2xl)"
   },
+  "sizes.breakpoint-postToc": {
+    "value": "1664px",
+    "variable": "var(--sizes-breakpoint-post-toc)"
+  },
   "animations.spin": {
     "value": "spin 1s linear infinite",
     "variable": "var(--animations-spin)"
@@ -1698,6 +1702,10 @@ const tokens = {
   "breakpoints.2xl": {
     "value": "1536px",
     "variable": "var(--breakpoints-2xl)"
+  },
+  "breakpoints.postToc": {
+    "value": "1664px",
+    "variable": "var(--breakpoints-post-toc)"
   },
   "spacing.-1": {
     "value": "calc(var(--spacing-1) * -1)",

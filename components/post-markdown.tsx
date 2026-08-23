@@ -366,7 +366,7 @@ function renderImage(
 				borderLeft: { base: "none", md: "1px solid var(--line)" },
 				borderRight: { base: "none", md: "1px solid var(--line)" },
 				bg: "var(--surface)",
-				boxShadow: { base: "none", md: "2px 2px 0 0 var(--line)" },
+				boxShadow: { base: "none", md: "1px 1px 0 0 var(--line)" },
 				overflow: "hidden",
 				display: "flex",
 				flexDirection: "column",

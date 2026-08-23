@@ -44,14 +44,14 @@ export default function CategoryPage() {
 								alignItems: "center",
 								justifyContent: "space-between",
 								borderRadius: "0.75rem",
-								border: "2px solid var(--line)",
+								border: "1px solid var(--line)",
 								bg: "var(--surface)",
 								px: "1rem",
 								py: "0.75rem",
 								transition: "all 0.15s ease",
 								_hover: {
 									bg: "var(--theme-soft)",
-									boxShadow: "4px 4px 0 0 var(--line)",
+									boxShadow: "3px 3px 0 0 var(--line)",
 								},
 							})}
 						>

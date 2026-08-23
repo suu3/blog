@@ -149,7 +149,7 @@ export default function PostSearch({ posts }: Props) {
 							justifyContent: "center",
 							gap: "0.375rem",
 							borderRadius: "9999px",
-							border: "2px solid var(--line)",
+							border: "1px solid var(--line)",
 							bg: "var(--surface)",
 							px: { base: "0.625rem", md: "0.875rem" },
 							py: { base: "0.375rem", md: "0.5rem" },
@@ -165,7 +165,7 @@ export default function PostSearch({ posts }: Props) {
 							},
 							_hover: {
 								bg: "var(--theme-soft)",
-								boxShadow: "3px 3px 0 0 var(--line)",
+								boxShadow: "2px 2px 0 0 var(--line)",
 							},
 						})}
 						aria-label="홈 상태로 필터 초기화"
@@ -188,7 +188,7 @@ export default function PostSearch({ posts }: Props) {
 					"neo-frame",
 					css({
 						borderRadius: "22px",
-						border: "2px solid var(--line)",
+						border: "1px solid var(--line)",
 						bg: "var(--theme-soft)",
 						p: { base: "0.75rem", md: "1rem" },
 					}),
@@ -197,7 +197,7 @@ export default function PostSearch({ posts }: Props) {
 				<div
 					className={css({
 						borderRadius: "1rem",
-						border: "2px solid var(--line)",
+						border: "1px solid var(--line)",
 						bg: "var(--surface)",
 						px: "1rem",
 						py: "0.75rem",
@@ -260,7 +260,7 @@ export default function PostSearch({ posts }: Props) {
 								className={css({
 									w: { base: "full", md: "21rem" },
 									borderRadius: "9999px",
-									border: "2px solid var(--line)",
+									border: "1px solid var(--line)",
 									bg: "var(--surface)",
 									px: "1rem",
 									py: "0.5rem",
@@ -290,7 +290,7 @@ export default function PostSearch({ posts }: Props) {
 						<div
 							className={css({
 								borderRadius: "1rem",
-								border: "2px solid var(--line)",
+								border: "1px solid var(--line)",
 								bg: "var(--surface)",
 								p: "0.75rem",
 							})}
@@ -363,7 +363,7 @@ export default function PostSearch({ posts }: Props) {
 						<div
 							className={css({
 								borderRadius: "1rem",
-								border: "2px solid var(--line)",
+								border: "1px solid var(--line)",
 								bg: "var(--surface)",
 								p: "0.75rem",
 							})}
@@ -450,13 +450,13 @@ export default function PostSearch({ posts }: Props) {
 													flexDir: "column",
 													h: "full",
 													borderRadius: "1rem",
-													border: "2px solid var(--line)",
+													border: "1px solid var(--line)",
 													bg: "var(--surface)",
 													p: "0.5rem",
 													transition: "all 0.2s ease",
 													_hover: {
 														transform: "translateY(-2px)",
-														boxShadow: "4px 4px 0 0 var(--line)",
+														boxShadow: "3px 3px 0 0 var(--line)",
 													},
 												}),
 											)}
@@ -466,7 +466,7 @@ export default function PostSearch({ posts }: Props) {
 													position: "relative",
 													overflow: "hidden",
 													borderRadius: "0.75rem",
-													border: "2px solid var(--line)",
+													border: "1px solid var(--line)",
 												})}
 											>
 												{(() => {
@@ -622,7 +622,7 @@ export default function PostSearch({ posts }: Props) {
 								alignItems: "center",
 								justifyContent: "center",
 								gap: "0.5rem",
-								borderTop: "2px solid var(--line)",
+								borderTop: "1px solid var(--line)",
 								pt: "1rem",
 							})}
 						>

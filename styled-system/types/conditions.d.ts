@@ -206,10 +206,16 @@ export interface Conditions {
 	"xlDown": string
 	/** `@media screen and (min-width: 96rem)` */
 	"2xl": string
-	/** `@media screen and (min-width: 96rem)` */
+	/** `@media screen and (min-width: 96rem) and (max-width: 103.9975rem)` */
 	"2xlOnly": string
 	/** `@media screen and (max-width: 95.9975rem)` */
 	"2xlDown": string
+	/** `@media screen and (min-width: 104rem)` */
+	"postToc": string
+	/** `@media screen and (min-width: 104rem)` */
+	"postTocOnly": string
+	/** `@media screen and (max-width: 103.9975rem)` */
+	"postTocDown": string
 	/** `@media screen and (min-width: 40rem) and (max-width: 47.9975rem)` */
 	"smToMd": string
 	/** `@media screen and (min-width: 40rem) and (max-width: 63.9975rem)` */
@@ -218,18 +224,28 @@ export interface Conditions {
 	"smToXl": string
 	/** `@media screen and (min-width: 40rem) and (max-width: 95.9975rem)` */
 	"smTo2xl": string
+	/** `@media screen and (min-width: 40rem) and (max-width: 103.9975rem)` */
+	"smToPostToc": string
 	/** `@media screen and (min-width: 48rem) and (max-width: 63.9975rem)` */
 	"mdToLg": string
 	/** `@media screen and (min-width: 48rem) and (max-width: 79.9975rem)` */
 	"mdToXl": string
 	/** `@media screen and (min-width: 48rem) and (max-width: 95.9975rem)` */
 	"mdTo2xl": string
+	/** `@media screen and (min-width: 48rem) and (max-width: 103.9975rem)` */
+	"mdToPostToc": string
 	/** `@media screen and (min-width: 64rem) and (max-width: 79.9975rem)` */
 	"lgToXl": string
 	/** `@media screen and (min-width: 64rem) and (max-width: 95.9975rem)` */
 	"lgTo2xl": string
+	/** `@media screen and (min-width: 64rem) and (max-width: 103.9975rem)` */
+	"lgToPostToc": string
 	/** `@media screen and (min-width: 80rem) and (max-width: 95.9975rem)` */
 	"xlTo2xl": string
+	/** `@media screen and (min-width: 80rem) and (max-width: 103.9975rem)` */
+	"xlToPostToc": string
+	/** `@media screen and (min-width: 96rem) and (max-width: 103.9975rem)` */
+	"2xlToPostToc": string
 	/** `@container  (min-width: 20rem)` */
 	"@/xs": string
 	/** `@container  (min-width: 24rem)` */

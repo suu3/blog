@@ -45,13 +45,13 @@ export default function MobileScrollControls() {
 				onClick={scrollTop}
 				className={css({
 					borderRadius: "9999px",
-					border: "2px solid var(--line)",
+					border: "1px solid var(--line)",
 					bg: "var(--surface)",
 					px: "0.75rem",
 					py: "0.5rem",
 					fontSize: "0.75rem",
 					fontWeight: "900",
-					boxShadow: "2px 2px 0 0 var(--line)",
+					boxShadow: "1px 1px 0 0 var(--line)",
 				})}
 				aria-label="맨 위로 이동"
 			>
@@ -62,13 +62,13 @@ export default function MobileScrollControls() {
 				onClick={scrollBottom}
 				className={css({
 					borderRadius: "9999px",
-					border: "2px solid var(--line)",
+					border: "1px solid var(--line)",
 					bg: "var(--surface)",
 					px: "0.75rem",
 					py: "0.5rem",
 					fontSize: "0.75rem",
 					fontWeight: "900",
-					boxShadow: "2px 2px 0 0 var(--line)",
+					boxShadow: "1px 1px 0 0 var(--line)",
 				})}
 				aria-label="맨 아래로 이동"
 			>

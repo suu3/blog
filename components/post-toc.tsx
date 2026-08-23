@@ -122,7 +122,7 @@ export default function PostToc({ items }: Props) {
 					border: "1px solid var(--line)",
 					bg: "var(--surface)",
 					p: "1rem",
-					boxShadow: "4px 4px 0 0 var(--line)",
+					boxShadow: "3px 3px 0 0 var(--line)",
 				}),
 			)}
 			onScroll={() => {
@@ -194,7 +194,7 @@ export default function PostToc({ items }: Props) {
 													bg: "var(--theme-soft)",
 													fontWeight: "600",
 													color: "var(--text)",
-													boxShadow: "2px 2px 0 0 var(--line)",
+													boxShadow: "1px 1px 0 0 var(--line)",
 												})
 											: css({
 													color: "var(--muted)",
