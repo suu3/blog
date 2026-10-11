@@ -1,0 +1,223 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { css, cx } from "@/styled-system/css";
+import PostActions from "@/components/post-actions";
+import PostComments from "@/components/post-comments";
+import PostMarkdown from "@/components/post-markdown";
+import PostNavigation from "@/components/post-navigation";
+import PostToc from "@/components/post-toc";
+import { getAccentBadgeClass } from "@/components/accent-badge";
+import { extractHeadings } from "@/lib/markdown";
+import { getAllPosts, getPostBySlug, getAdjacentPosts } from "@/lib/posts";
+
+type Props = {
+	params: Promise<{ slug: string[] }>;
+};
+
+export async function generateStaticParams() {
+	return getAllPosts().map((post) => ({
+		slug: post.slug.split("/"),
+	}));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const { slug: slugSegments } = await params;
+	const slug = slugSegments.map(decodeURIComponent).join("/");
+	const post = getPostBySlug(slug);
+
+	if (!post) {
+		return {
+			title: "Post Not Found",
+		};
+	}
+
+	return {
+		title: post.title,
+		description: post.description,
+		openGraph: {
+			title: post.title,
+			description: post.description,
+			type: "article",
+			publishedTime: new Date(post.date).toISOString(),
+			tags: post.tags,
+			images: [
+				{
+					url: post.thumbnail,
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: post.title,
+			description: post.description,
+			images: [post.thumbnail],
+		},
+	};
+}
+
+export default async function PostDetailPage({ params }: Props) {
+	const allCategories = Array.from(
+		new Set(getAllPosts().map((item) => item.category)),
+	);
+	const { slug: slugSegments } = await params;
+	const slug = slugSegments.map(decodeURIComponent).join("/");
+	const post = getPostBySlug(slug);
+
+	if (!post) {
+		notFound();
+	}
+
+	const headings = extractHeadings(post.content);
+	const { prev, next } = getAdjacentPosts(slug);
+
+	return (
+		<div
+			className={css({
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "flex-start",
+				gap: "2rem",
+				w: "full",
+				position: "relative",
+			})}
+		>
+			<div
+				className={css({
+					display: { base: "none", postToc: "block" },
+					flexShrink: 0,
+					w: "260px",
+					alignSelf: "flex-start",
+					position: "sticky",
+					top: "6rem",
+				})}
+			>
+				<PostToc items={headings} />
+			</div>
+
+			<article
+				className={css({
+					borderRadius: "0.75rem",
+					border: "1px solid var(--line)",
+					bg: "var(--surface)",
+					p: { base: "1rem", md: "2rem" },
+					boxShadow: "3px 3px 0 0 var(--line)",
+					minWidth: 0,
+					w: "full",
+					maxW: "64rem",
+					overflow: "hidden",
+				})}
+			>
+				<p
+					className={cx(
+						css({
+							mb: "0.75rem",
+							display: "inline-block",
+							borderRadius: "0.375rem",
+							border: "1px solid var(--line)",
+							px: "0.5rem",
+							py: "0.25rem",
+							fontFamily: "FiraCode-Medium, monospace",
+							fontWeight: "700",
+							fontSize: "0.75rem",
+						}),
+						getAccentBadgeClass(post.category, allCategories),
+					)}
+				>
+					{post.category}
+				</p>
+				<h1
+					className={css({
+						fontSize: { base: "1.5rem", md: "1.875rem" },
+						fontWeight: "900",
+						letterSpacing: "-0.025em",
+					})}
+				>
+					{post.title}
+				</h1>
+				<p
+					className={css({
+						mt: "0.5rem",
+						fontSize: "0.875rem",
+						color: "var(--muted)",
+					})}
+				>
+					{post.date}
+				</p>
+
+				<PostActions />
+
+				<div
+					className={css({
+						mt: "1rem",
+						display: "flex",
+						flexWrap: "wrap",
+						gap: "0.5rem",
+					})}
+				>
+					{(post.tags.length ? post.tags : ["없음"]).map((tag) => (
+						<Link
+							key={tag}
+							href={`/tag/${encodeURIComponent(tag)}`}
+							className={css({
+								borderRadius: "0.375rem",
+								border: "1px solid var(--line)",
+								bg: "var(--surface)",
+								px: "0.5rem",
+								py: "0.25rem",
+								fontSize: "0.75rem",
+								fontWeight: "600",
+								transition: "all 0.15s ease",
+								_hover: { bg: "var(--theme-soft)" },
+							})}
+						>
+							#{tag}
+						</Link>
+					))}
+				</div>
+
+				<hr className={css({ my: "1.5rem", borderColor: "var(--line)" })} />
+
+				<div className="post-content">
+					<PostMarkdown content={post.content} />
+				</div>
+
+				<PostComments issueTerm={post.slug} />
+
+				<PostNavigation prev={prev} next={next} />
+
+				<Link
+					href="/"
+					prefetch={false}
+					className={css({
+						mt: "2rem",
+						display: "inline-flex",
+						alignItems: "center",
+						borderRadius: "0.375rem",
+						border: "1px solid var(--line)",
+						bg: "var(--surface)",
+						px: "0.75rem",
+						py: "0.5rem",
+						fontSize: "0.875rem",
+						fontWeight: "600",
+						transition: "all 0.15s ease",
+						_hover: {
+							transform: "translate(-2px, -2px)",
+							bg: "var(--theme-soft)",
+						},
+					})}
+				>
+					← 목록으로
+				</Link>
+			</article>
+
+			<div
+				className={css({
+					display: { base: "none", postToc: "block" },
+					flexShrink: 0,
+					w: "260px",
+				})}
+			/>
+		</div>
+	);
+}
