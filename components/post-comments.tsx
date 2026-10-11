@@ -44,7 +44,7 @@ export default function PostComments({ issueTerm }: Props) {
 		script.src = "https://utteranc.es/client.js";
 		script.async = true;
 		script.crossOrigin = "anonymous";
-		script.setAttribute("repo", "suu3/suu3.github.io");
+		script.setAttribute("repo", "suu3/blog-utterance");
 		script.setAttribute("issue-term", issueTerm);
 		script.setAttribute("label", "comment");
 		script.setAttribute("theme", utterancesTheme);
